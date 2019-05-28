@@ -1,0 +1,21 @@
+Options +FollowSymLinks
+IndexIgnore */*
+RewriteEngine on
+
+#Order deny,allow
+#deny from all
+#Allow from 194.44.174.50 192.168.0.1
+
+RewriteCond %{REQUEST_URI} !^/(web)
+RewriteRule ^assets/(.*)$ /web/assets/$1 [L]
+RewriteRule ^css/(.*)$ web/css/$1 [L]
+RewriteRule ^js/(.*)$ web/js/$1 [L]
+RewriteRule ^fonts/(.*)$ web/fonts/$1 [L]
+RewriteRule ^images/(.*)$ web/images/$1 [L]
+#RewriteRule ^images/(.*)$ web/adminStyle/images/$1 [L]
+RewriteRule (.*) /web/$1
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /web/index.php
+php_value max_input_vars 5000
